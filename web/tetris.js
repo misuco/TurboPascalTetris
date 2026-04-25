@@ -64,12 +64,21 @@ function init() {
     nextCanvas.width = 80;
     nextCanvas.height = 80;
 
-    // Event listeners
+    // Event listeners for menu buttons
     document.getElementById('playBtn').addEventListener('click', startGame);
     document.getElementById('pauseBtn').addEventListener('click', togglePause);
     document.getElementById('optionsBtn').addEventListener('click', () => openModal('optionsModal'));
     document.getElementById('helpBtn').addEventListener('click', () => openModal('helpModal'));
     document.getElementById('topFiveBtn').addEventListener('click', showTopFive);
+
+    // Event listeners for mobile control buttons
+    document.getElementById('leftBtn').addEventListener('click', moveLeft);
+    document.getElementById('rightBtn').addEventListener('click', moveRight);
+    document.getElementById('rotateBtn').addEventListener('click', rotateStoneCW);
+    document.getElementById('dropBtn').addEventListener('click', quickDrop);
+
+    // Touch events for better mobile support
+    addTouchListeners();
 
     // Options modal
     document.getElementById('levelSlider').addEventListener('change', (e) => {
@@ -102,6 +111,47 @@ function init() {
     loadTopFive();
     initializePlayField();
     drawGame();
+}
+
+// Add touch event listeners for better mobile responsiveness
+function addTouchListeners() {
+    const buttons = document.querySelectorAll('.control-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            btn.style.opacity = '0.8';
+        });
+        btn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            btn.style.opacity = '1';
+        });
+    });
+}
+
+// Mobile control functions
+function moveLeft() {
+    if (!gameState.gameRunning || gameState.gamePaused) return;
+    if (canPlace(gameState.currentStone, gameState.stoneX - 1, gameState.stoneY)) {
+        gameState.stoneX--;
+        redrawGame();
+    }
+}
+
+function moveRight() {
+    if (!gameState.gameRunning || gameState.gamePaused) return;
+    if (canPlace(gameState.currentStone, gameState.stoneX + 1, gameState.stoneY)) {
+        gameState.stoneX++;
+        redrawGame();
+    }
+}
+
+function quickDrop() {
+    if (!gameState.gameRunning || gameState.gamePaused) return;
+    while (canPlace(gameState.currentStone, gameState.stoneX, gameState.stoneY + 1)) {
+        gameState.stoneY++;
+        gameState.score += 1;
+    }
+    dropStone();
 }
 
 // Initialize play field
@@ -279,7 +329,7 @@ function calculateScore(linesCleared) {
 
 // Rotate stone
 function rotateStoneCW() {
-    if (!gameState.gameRunning) return;
+    if (!gameState.gameRunning || gameState.gamePaused) return;
 
     const shape = TETROMINOES[gameState.currentStone];
     const rotated = rotateShape(shape);
@@ -291,6 +341,7 @@ function rotateStoneCW() {
 
     if (canPlace(gameState.currentStone, gameState.stoneX, gameState.stoneY)) {
         // Rotation successful
+        redrawGame();
     } else {
         // Restore original shape if rotation not possible
         TETROMINOES[gameState.currentStone] = originalShape;
@@ -320,15 +371,11 @@ function handleKeyPress(e) {
 
     switch (e.key.toLowerCase()) {
         case 'arrowleft':
-            if (canPlace(gameState.currentStone, gameState.stoneX - 1, gameState.stoneY)) {
-                gameState.stoneX--;
-            }
+            moveLeft();
             e.preventDefault();
             break;
         case 'arrowright':
-            if (canPlace(gameState.currentStone, gameState.stoneX + 1, gameState.stoneY)) {
-                gameState.stoneX++;
-            }
+            moveRight();
             e.preventDefault();
             break;
         case 'arrowdown':
