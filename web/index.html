@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TETRIS - Web Version</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>T E T R I S</h1>
+            <p class="subtitle">Web Version - Original by Claudio Zopfi (1992)</p>
+        </div>
+
+        <div class="main-content">
+            <div class="game-section">
+                <canvas id="gameCanvas" width="200" height="350"></canvas>
+                <div class="game-info">
+                    <div class="info-box">
+                        <label>Score:</label>
+                        <div id="score">0</div>
+                    </div>
+                    <div class="info-box">
+                        <label>Lines:</label>
+                        <div id="lines">0</div>
+                    </div>
+                    <div class="info-box">
+                        <label>Stones:</label>
+                        <div id="stones">0</div>
+                    </div>
+                    <div class="info-box">
+                        <label>Level:</label>
+                        <div id="level">1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-panel">
+                <div class="menu">
+                    <h2>Menu</h2>
+                    <button id="playBtn" class="menu-btn">Play Game</button>
+                    <button id="pauseBtn" class="menu-btn" disabled>Pause</button>
+                    <button id="optionsBtn" class="menu-btn">Options</button>
+                    <button id="helpBtn" class="menu-btn">Help</button>
+                    <button id="topFiveBtn" class="menu-btn">Top 5 Scores</button>
+                </div>
+
+                <div class="next-stone">
+                    <h3>Next Stone:</h3>
+                    <canvas id="nextCanvas" width="80" height="80"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <h3>Controls</h3>
+            <p><strong>Arrow Keys:</strong> Move left/right</p>
+            <p><strong>Down Arrow:</strong> Drop faster</p>
+            <p><strong>Space:</strong> Rotate stone</p>
+            <p><strong>P:</strong> Pause/Resume</p>
+            <p><strong>ESC:</strong> Quit game</p>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="optionsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Options</h2>
+            <div class="option-item">
+                <label>Level (1-5):</label>
+                <input type="range" id="levelSlider" min="1" max="5" value="1">
+                <span id="levelValue">1</span>
+            </div>
+            <div class="option-item">
+                <label>
+                    <input type="checkbox" id="autoSpeedUp" checked>
+                    Auto Speed Up
+                </label>
+            </div>
+            <div class="option-item">
+                <label>Background Color:</label>
+                <input type="color" id="bgColor" value="#ffffff">
+            </div>
+            <div class="option-item">
+                <label>
+                    <input type="checkbox" id="showNext" checked>
+                    Show Next Stone
+                </label>
+            </div>
+            <button onclick="closeModal('optionsModal')" class="btn-confirm">Close</button>
+        </div>
+    </div>
+
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Help</h2>
+            <div class="help-text">
+                <h3>How to Play</h3>
+                <p><strong>Arrow Keys Left/Right:</strong> Move the falling stone left or right</p>
+                <p><strong>Arrow Key Down:</strong> Drop the stone faster (gain bonus points)</p>
+                <p><strong>Space Bar:</strong> Rotate the current stone</p>
+                <p><strong>P:</strong> Pause or resume the game</p>
+                <p><strong>ESC:</strong> Quit the current game</p>
+                <h3>Scoring</h3>
+                <p>Complete horizontal lines to clear them and earn points.</p>
+                <p>Bonus points awarded for dropping stones quickly.</p>
+                <p>Game speeds up as you progress through levels.</p>
+            </div>
+            <button onclick="closeModal('helpModal')" class="btn-confirm">Close</button>
+        </div>
+    </div>
+
+    <div id="topFiveModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Top 5 High Scores</h2>
+            <table class="scores-table">
+                <tr><th>Rank</th><th>Name</th><th>Score</th></tr>
+                <tbody id="topFiveTable">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+            <button onclick="closeModal('topFiveModal')" class="btn-confirm">Close</button>
+        </div>
+    </div>
+
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2>Game Over!</h2>
+            <p>Your Final Score: <span id="finalScore">0</span></p>
+            <div class="game-over-input">
+                <label>Enter your name (for high scores):</label>
+                <input type="text" id="playerName" maxlength="20" placeholder="Your name">
+            </div>
+            <button onclick="saveScore()" class="btn-confirm">Save Score</button>
+            <button onclick="closeModal('gameOverModal'); resetGame()" class="btn-confirm">Play Again</button>
+        </div>
+    </div>
+
+    <script src="tetris.js"></script>
+</body>
+</html>
