@@ -71,14 +71,26 @@ function init() {
     document.getElementById('helpBtn').addEventListener('click', () => openModal('helpModal'));
     document.getElementById('topFiveBtn').addEventListener('click', showTopFive);
 
-    // Event listeners for mobile control buttons
-    document.getElementById('leftBtn').addEventListener('click', moveLeft);
-    document.getElementById('rightBtn').addEventListener('click', moveRight);
-    document.getElementById('rotateBtn').addEventListener('click', rotateStoneCW);
-    document.getElementById('dropBtn').addEventListener('click', quickDrop);
+    // Event listeners for mobile control buttons - both click and touch
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+    const rotateBtn = document.getElementById('rotateBtn');
+    const dropBtn = document.getElementById('dropBtn');
 
-    // Touch events for better mobile support
-    addTouchListeners();
+    leftBtn.addEventListener('click', moveLeft);
+    leftBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveLeft(); });
+
+    rightBtn.addEventListener('click', moveRight);
+    rightBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveRight(); });
+
+    rotateBtn.addEventListener('click', rotateStoneCW);
+    rotateBtn.addEventListener('touchstart', (e) => { e.preventDefault(); rotateStoneCW(); });
+
+    dropBtn.addEventListener('click', quickDrop);
+    dropBtn.addEventListener('touchstart', (e) => { e.preventDefault(); quickDrop(); });
+
+    // Add visual feedback for touch
+    addButtonVisualFeedback();
 
     // Options modal
     document.getElementById('levelSlider').addEventListener('change', (e) => {
@@ -113,16 +125,14 @@ function init() {
     drawGame();
 }
 
-// Add touch event listeners for better mobile responsiveness
-function addTouchListeners() {
+// Add visual feedback for button touches
+function addButtonVisualFeedback() {
     const buttons = document.querySelectorAll('.control-btn');
     buttons.forEach(btn => {
         btn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            btn.style.opacity = '0.8';
+            btn.style.opacity = '0.6';
         });
         btn.addEventListener('touchend', (e) => {
-            e.preventDefault();
             btn.style.opacity = '1';
         });
     });
