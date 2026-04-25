@@ -16,6 +16,15 @@
         <div class="main-content">
             <div class="game-section">
                 <canvas id="gameCanvas" width="200" height="350"></canvas>
+                
+                <!-- Mobile Control Buttons -->
+                <div class="mobile-controls">
+                    <button id="leftBtn" class="control-btn" title="Move Left">←</button>
+                    <button id="rotateBtn" class="control-btn" title="Rotate">↻</button>
+                    <button id="rightBtn" class="control-btn" title="Move Right">→</button>
+                    <button id="dropBtn" class="control-btn drop-btn" title="Drop">▼ DROP</button>
+                </div>
+
                 <div class="game-info">
                     <div class="info-box">
                         <label>Score:</label>
@@ -60,6 +69,7 @@
             <p><strong>Space:</strong> Rotate stone</p>
             <p><strong>P:</strong> Pause/Resume</p>
             <p><strong>ESC:</strong> Quit game</p>
+            <p style="margin-top: 15px; color: #667eea;"><strong>📱 Mobile:</strong> Use the buttons below the game board</p>
         </div>
     </div>
 
@@ -98,12 +108,19 @@
             <span class="close">&times;</span>
             <h2>Help</h2>
             <div class="help-text">
-                <h3>How to Play</h3>
+                <h3>How to Play (Desktop)</h3>
                 <p><strong>Arrow Keys Left/Right:</strong> Move the falling stone left or right</p>
                 <p><strong>Arrow Key Down:</strong> Drop the stone faster (gain bonus points)</p>
                 <p><strong>Space Bar:</strong> Rotate the current stone</p>
                 <p><strong>P:</strong> Pause or resume the game</p>
                 <p><strong>ESC:</strong> Quit the current game</p>
+                
+                <h3>How to Play (Mobile)</h3>
+                <p><strong>← Button:</strong> Move the stone left</p>
+                <p><strong>→ Button:</strong> Move the stone right</p>
+                <p><strong>↻ Button:</strong> Rotate the current stone</p>
+                <p><strong>▼ DROP Button:</strong> Drop the stone to the bottom</p>
+                
                 <h3>Scoring</h3>
                 <p>Complete horizontal lines to clear them and earn points.</p>
                 <p>Bonus points awarded for dropping stones quickly.</p>
