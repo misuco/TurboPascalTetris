@@ -70,6 +70,52 @@ body {
     margin-top: 10px;
 }
 
+/* Mobile Control Buttons */
+.mobile-controls {
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    padding: 15px 10px;
+    background-color: #667eea;
+    color: white;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:hover {
+    background-color: #764ba2;
+    border-color: #764ba2;
+}
+
+.control-btn.drop-btn {
+    grid-column: 1 / -1;
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    font-size: 18px;
+}
+
+.control-btn.drop-btn:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
 .game-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -363,5 +409,71 @@ body {
 
     .game-info {
         grid-template-columns: 1fr 1fr;
+    }
+
+    /* Show mobile controls on tablets and below */
+    .mobile-controls {
+        display: grid;
+    }
+
+    .control-btn {
+        padding: 18px 12px;
+        font-size: 18px;
+    }
+
+    .control-btn.drop-btn {
+        padding: 18px 12px;
+        font-size: 16px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+    }
+
+    .game-section {
+        min-width: 100%;
+    }
+
+    .control-btn {
+        padding: 12px 8px;
+        font-size: 16px;
+        gap: 5px;
+    }
+
+    .control-btn.drop-btn {
+        padding: 12px 8px;
+        font-size: 14px;
+    }
+
+    .game-info {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .info-box {
+        padding: 10px;
+    }
+
+    .info-box div {
+        font-size: 20px;
+    }
+
+    .modal-content {
+        margin: 20% auto;
+        padding: 20px;
+        width: 95%;
     }
 }
