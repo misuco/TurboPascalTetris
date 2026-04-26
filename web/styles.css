@@ -42,6 +42,23 @@ body {
     font-style: italic;
 }
 
+.intro-link {
+    margin-top: 15px;
+}
+
+.intro-link a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.intro-link a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
 .main-content {
     display: flex;
     gap: 30px;
