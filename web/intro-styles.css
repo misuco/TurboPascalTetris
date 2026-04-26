@@ -1,0 +1,352 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff00;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Animated starfield background */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.stars::before,
+.stars::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #00ff00;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+}
+
+.stars::before {
+    top: 20%;
+    left: 30%;
+    animation-delay: 0s;
+}
+
+.stars::after {
+    top: 60%;
+    left: 70%;
+    animation-delay: 1.5s;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.intro-container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    width: 100%;
+}
+
+.intro-content {
+    background: #000;
+    border: 3px solid #00ff00;
+    padding: 40px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3),
+                inset 0 0 10px rgba(0, 255, 0, 0.1);
+    position: relative;
+}
+
+/* Glitch effect for title */
+h1.glitch {
+    font-size: 72px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+    animation: glitch 0.3s infinite;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff, 0 0 10px #00ff00;
+        transform: translate(0);
+    }
+    20% {
+        text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff, 0 0 10px #00ff00;
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff, 0 0 10px #00ff00;
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff, 0 0 10px #00ff00;
+        transform: translate(2px, 2px);
+    }
+    80% {
+        text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff, 0 0 10px #00ff00;
+        transform: translate(2px, -2px);
+    }
+    100% {
+        text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff, 0 0 10px #00ff00;
+        transform: translate(0);
+    }
+}
+
+.tagline {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 40px;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* Text blocks with blinking borders */
+.text-block {
+    margin-bottom: 25px;
+    position: relative;
+    animation: fadeInBlock 0.6s ease-out;
+}
+
+.text-block:nth-child(3) {
+    animation-delay: 0.1s;
+}
+
+.text-block:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.text-block:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+.text-block:nth-child(6) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInBlock {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.block-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid #00ff00;
+    pointer-events: none;
+    animation: blink 1s infinite;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5),
+                inset 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+@keyframes blink {
+    0%, 49%, 100% {
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.5),
+                    inset 0 0 10px rgba(0, 255, 0, 0.2);
+    }
+    50%, 99% {
+        box-shadow: 0 0 30px rgba(0, 255, 0, 0.8),
+                    inset 0 0 20px rgba(0, 255, 0, 0.4);
+    }
+}
+
+.block-content {
+    background: #000;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.block-content h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #00ff00;
+    text-shadow: 0 0 8px #00ff00;
+    border-bottom: 1px solid #00ff00;
+    padding-bottom: 8px;
+}
+
+.block-content p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #00ff00;
+    margin-bottom: 8px;
+}
+
+.block-content strong {
+    color: #ffff00;
+    text-shadow: 0 0 5px #ffff00;
+}
+
+/* Play Button */
+.play-button {
+    width: 100%;
+    padding: 18px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: #000;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    cursor: pointer;
+    position: relative;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.play-button:hover {
+    background: #00ff00;
+    color: #000;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.8),
+                inset 0 0 20px rgba(0, 255, 0, 0.3);
+    transform: scale(1.02);
+}
+
+.play-button:active {
+    transform: scale(0.98);
+}
+
+.button-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 255, 0, 0.2);
+    animation: buttonGlow 2s infinite;
+}
+
+@keyframes buttonGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+.button-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* Keyboard Hint */
+.keyboard-hint {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #00ff00;
+    animation: blinker 1.5s infinite;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+@keyframes blinker {
+    0%, 49%, 100% { opacity: 0.7; }
+    50%, 99% { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .intro-content {
+        padding: 25px;
+    }
+
+    h1.glitch {
+        font-size: 48px;
+    }
+
+    .text-block {
+        margin-bottom: 20px;
+    }
+
+    .block-content h2 {
+        font-size: 16px;
+    }
+
+    .block-content p {
+        font-size: 12px;
+    }
+
+    .play-button {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-content {
+        padding: 15px;
+        border: 2px solid #00ff00;
+    }
+
+    h1.glitch {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+
+    .tagline {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .text-block {
+        margin-bottom: 15px;
+    }
+
+    .block-content {
+        padding: 15px;
+    }
+
+    .block-content h2 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .block-content p {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+
+    .play-button {
+        padding: 12px 15px;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .keyboard-hint {
+        font-size: 11px;
+        margin-top: 15px;
+    }
+}
